@@ -5,6 +5,7 @@ extern crate reqwest;
 
 use regex::Regex;
 use std::fs;
+use std::io::Error;
 use std::path::Path;
 use std::sync::mpsc::channel;
 use std::thread;
@@ -19,7 +20,24 @@ impl Dictionary {
         Dictionary { items: items }
     }
 
-    pub fn create_from_web(thread_num: usize) -> Dictionary {
+    pub fn create_from_file(&self, path: &Path) -> Dictionary {
+        Dictionary {
+            items: fs::read_to_string(path)
+                .expect("Unable to read file!")
+                .split("\n")
+                .map(|element| {
+                    let props = element.split("\t").collect::<Vec<&str>>();
+                    DictionaryItem {
+                        word: props[0].to_string(),
+                        meaning: props[1].to_string(),
+                        pos: props[2].split(",").map(|value| value.to_string()).collect(),
+                        category: props[3].split(",").map(|value| value.to_string()).collect(),
+                    }
+                }).collect(),
+        }
+    }
+
+    pub fn create_from_web(&self, thread_num: usize) -> Dictionary {
         let (sender, receiver) = channel();
         for i in 0..thread_num {
             lazy_static! {
@@ -55,14 +73,14 @@ impl Dictionary {
             }
             let url_size = urls.len();
             let url_unit = url_size / thread_num;
-            let my_urls = if i == thread_num - 1 {
+            let urls_allocated = if i == thread_num - 1 {
                 &urls[(i * url_unit)..]
             } else {
                 &urls[(i * url_unit)..((i + 1) * url_unit)]
             };
             let my_sender = sender.clone();
             thread::spawn(move || {
-                for url in my_urls {
+                for url in urls_allocated {
                     let html = reqwest::get(url).ok().unwrap().text().unwrap();
                     let elements: Vec<&str> = html
                         .split("<span id=\"print_area\">\n\t\t<p class=\"exp\">")
@@ -111,6 +129,37 @@ impl Dictionary {
         }
 
         Dictionary { items: items }
+    }
+
+    pub fn find(&self, word: &str) -> Result<&DictionaryItem, ()> {
+        for item in &self.items {
+            if item.word == word {
+                return Ok(item);
+            }
+        }
+        Err(())
+    }
+
+    pub fn find_all(&self, word: &str) -> Result<Vec<&DictionaryItem>, ()> {
+        let mut items = vec![];
+        for item in &self.items {
+            if item.word == word {
+                items.push(item);
+            }
+        }
+        if items.len() > 0 {
+            return Ok(items);
+        }
+        Err(())
+    }
+
+    pub fn has(&self, word: &str) -> bool {
+        for item in &self.items {
+            if item.word == word {
+                return true;
+            }
+        }
+        return false;
     }
 
     pub fn save_as_tsv(self, path: &Path) {
