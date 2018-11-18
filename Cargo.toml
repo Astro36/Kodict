@@ -5,6 +5,7 @@ version = "0.1.0"
 authors = ["Seungjae Park <astr36@naver.com>"]
 documentation = "https://docs.rs/kodict"
 repository = "https://github.com/Astro36/Kodict"
+readme = "README.md"
 keywords = ["korean", "dictionary", "crawler" , "hangul"]
 license = "MIT"
 
