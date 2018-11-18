@@ -5,22 +5,21 @@ extern crate reqwest;
 
 use regex::Regex;
 use std::fs;
-use std::io::Error;
 use std::path::Path;
 use std::sync::mpsc::channel;
 use std::thread;
 
 #[derive(Debug)]
 pub struct Dictionary {
-    pub items: Vec<DictionaryItem>,
+    items: Vec<DictionaryItem>,
 }
 
 impl Dictionary {
-    pub fn new(&self, items: Vec<DictionaryItem>) -> Dictionary {
+    pub fn new(items: Vec<DictionaryItem>) -> Dictionary {
         Dictionary { items: items }
     }
 
-    pub fn create_from_file(&self, path: &Path) -> Dictionary {
+    pub fn create_from_file(path: &Path) -> Dictionary {
         Dictionary {
             items: fs::read_to_string(path)
                 .expect("Unable to read file!")
@@ -37,7 +36,7 @@ impl Dictionary {
         }
     }
 
-    pub fn create_from_web(&self, thread_num: usize) -> Dictionary {
+    pub fn create_from_web(thread_num: usize) -> Dictionary {
         let (sender, receiver) = channel();
         for i in 0..thread_num {
             lazy_static! {
@@ -179,6 +178,10 @@ impl Dictionary {
                 .join("\n")
                 .as_bytes(),
         ).expect("Unable to write file!");
+    }
+
+    pub fn size(&self) -> usize {
+        self.items.len()
     }
 }
 
