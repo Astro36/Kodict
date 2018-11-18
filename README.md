@@ -1,8 +1,10 @@
 # Kodict
 
-> Provides Korean Dictionary Implements and Dictionary Crawler for Rust
+> Provides Korean Dictionary Implements and Crawler for Rust
 
-## ChangeLog
+[![Crates.io](https://img.shields.io/crates/v/kodict.svg?style=for-the-badge)](https://crates.io/crates/kodict) [![Crates.io](https://img.shields.io/crates/d/kodict.svg?style=for-the-badge)](https://crates.io/crates/kodict)
+
+## Changelog
 
 See [CHANGELOG](./CHANGELOG.md)
 
@@ -24,7 +26,7 @@ git clone https://github.com/Astro36/Kodict.git
 
 ### API Documentation
 
-See [API]()
+See [API](https://docs.rs/kodict)
 
 ## License
 

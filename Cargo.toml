@@ -1,7 +1,12 @@
 [package]
 name = "kodict"
+description = "Provides Korean Dictionary Implements and Crawler for Rust"
 version = "0.1.0"
 authors = ["Seungjae Park <astr36@naver.com>"]
+documentation = "https://docs.rs/kodict"
+repository = "https://github.com/Astro36/Kodict"
+readme = "https://github.com/Astro36/Kodict/README.md"
+keywords = ["korean", "dictionary", "crawler" , "hangul"]
 license = "MIT"
 
 [dependencies]
