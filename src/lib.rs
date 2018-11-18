@@ -187,8 +187,8 @@ impl Dictionary {
 
 #[derive(Debug)]
 pub struct DictionaryItem {
-    word: String,
-    meaning: String,
-    pos: Vec<String>,
-    category: Vec<String>,
+    pub word: String,
+    pub meaning: String,
+    pub pos: Vec<String>,
+    pub category: Vec<String>,
 }
