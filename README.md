@@ -10,7 +10,7 @@ See [CHANGELOG](./CHANGELOG.md)
 
 ## Installation
 
-- Install with cargo.
+- Install with [cargo](https://crates.io/crates/kodict).
 
 - Clone the repo:
 

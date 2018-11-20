@@ -161,10 +161,11 @@ impl Dictionary {
         return false;
     }
 
-    pub fn save_as_tsv(self, path: &Path) {
+    pub fn save_as_tsv(&self, path: &Path) {
+        let items = &self.items;
         fs::write(
             &path,
-            self.items
+            items
                 .into_iter()
                 .map(|item| {
                     format!(
