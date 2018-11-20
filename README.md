@@ -10,11 +10,7 @@ See [CHANGELOG](./CHANGELOG.md)
 
 ## Installation
 
-- Install with cargo:
-
-```bash
-cargo add kodict
-```
+- Install with cargo.
 
 - Clone the repo:
 
