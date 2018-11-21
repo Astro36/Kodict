@@ -61,7 +61,7 @@ impl Dictionary {
                     ('ㅎ', "%E3%85%8E", 28406),
                 ].into_iter().map(|(_, encoded_consonant, amount)| {
                     let mut url = vec![];
-                    for i in 1..(amount / 500 + 1){
+                    for i in 1..(amount / 500 + 2){
                         url.push(format!("http://stdweb2.korean.go.kr/search/List_dic.jsp?setJaso={}&PageRow=500&SearchPart=Index&go={}", encoded_consonant, i));
                     }
                     url
@@ -103,7 +103,6 @@ impl Dictionary {
                             "",
                         );
                         let meaning = sign_remover.replace_all(&desc, "");
-                        // println!("{:?}", word.to_string());
                         items.push(DictionaryItem {
                             word: word.to_string(),
                             meaning: meaning.trim().to_string(),
@@ -123,7 +122,7 @@ impl Dictionary {
         }
 
         let mut items = vec![];
-        for _ in 0..878 {
+        for _ in 0..892 {
             items.extend(receiver.recv().unwrap());
         }
 

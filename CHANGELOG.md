@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.1.2
+
+Released Nov 21, 2018
+
+### Fixed
+
+- Fixed a bug that missed some words.
+
 ## v0.1.1
 
 Released Nov 20, 2018
