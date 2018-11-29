@@ -1,12 +1,20 @@
 # Changelog
 
+## v0.1.3
+
+Released Nov 29, 2018
+
+### Fixed
+
+- Fix a bug that `\n` exists in the meaning of a dictionary items.
+
 ## v0.1.2
 
 Released Nov 21, 2018
 
 ### Fixed
 
-- Fixed a bug that missed some words.
+- Fix a bug that missed some words.
 
 ## v0.1.1
 

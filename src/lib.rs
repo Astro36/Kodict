@@ -105,7 +105,7 @@ impl Dictionary {
                         let meaning = sign_remover.replace_all(&desc, "");
                         items.push(DictionaryItem {
                             word: word.to_string(),
-                            meaning: meaning.trim().to_string(),
+                            meaning: meaning.trim().replace("\n", " ").to_string(),
                             pos: pos_matcher
                                 .captures_iter(&meaning)
                                 .map(|c| c.get(1).unwrap().as_str().to_string())
