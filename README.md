@@ -15,7 +15,7 @@ See [CHANGELOG](./CHANGELOG.md)
 - Clone the repo:
 
 ```bash
-git clone https://github.com/Astro36/Kodict.git
+git clone https://github.com/Astro36/kodict.git
 ```
 
 ## Usage
