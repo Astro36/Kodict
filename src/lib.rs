@@ -3,59 +3,47 @@ extern crate lazy_static;
 extern crate regex;
 extern crate reqwest;
 
+use std::collections::BTreeMap;
+
+pub mod crawler;
 pub mod fs;
 
-pub struct Dictionary {
-    items: Vec<DictionaryItem>,
-}
-
-impl Dictionary {
-    pub fn new(items: Vec<DictionaryItem>) -> Dictionary {
-        Dictionary {
-            items: items,
-        }
-    }
-
-    pub fn find(&self, word: &str) -> Result<&DictionaryItem, ()> {
-        for item in &self.items {
-            if item.word == word {
-                return Ok(item);
-            }
-        }
-        Err(())
-    }
-
-    pub fn find_all(&self, word: &str) -> Result<Vec<&DictionaryItem>, ()> {
-        let mut items = vec![];
-        for item in &self.items {
-            if item.word == word {
-                items.push(item);
-            }
-        }
-        if items.len() > 0 {
-            return Ok(items);
-        }
-        Err(())
-    }
-
-    pub fn has(&self, word: &str) -> bool {
-        for item in &self.items {
-            if item.word == word {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    pub fn size(&self) -> usize {
-        self.items.len()
-    }
-}
-
 #[derive(Debug)]
-pub struct DictionaryItem {
-    pub word: String,
+pub struct Word {
+    pub entry: String,
     pub meaning: String,
     pub pos: Vec<String>,
     pub category: Vec<String>,
+}
+
+pub struct Dictionary {
+    words: BTreeMap<String, Vec<Word>>,
+}
+
+impl Dictionary {
+    pub fn new(words: Vec<Word>) -> Dictionary {
+        let mut map = BTreeMap::new();
+        for word in words {
+            let entry = word.entry.to_string();
+            if map.contains_key(&entry) {
+                let v: &mut Vec<Word> = map.get_mut(&entry).unwrap();
+                v.push(word);
+            } else {
+                map.insert(entry, vec![word]);
+            }
+        }
+        Dictionary { words: map }
+    }
+
+    pub fn find(&self, entry: &str) -> Option<&Vec<Word>> {
+        self.words.get(entry)
+    }
+
+    pub fn has(&self, entry: &str) -> bool {
+        self.words.contains_key(entry)
+    }
+
+    pub fn size(&self) -> usize {
+        self.words.len()
+    }
 }

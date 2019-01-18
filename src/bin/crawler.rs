@@ -1,10 +1,11 @@
 extern crate kodict;
 
-use kodict::Dictionary;
+use kodict::crawler;
+use kodict::fs;
 use std::path::Path;
 
 fn main() {
-    let dictionary = Dictionary::create_from_web(16);
-    println!("Complete: {:?} words", dictionary.size());
-    dictionary.save_as_tsv(Path::new("./dictionary.tsv"));
+    let words = crawler::get_standard_dictionary(16);
+    fs::write_as_tsv(Path::new("./dictionary.tsv"), &words);
+    println!("Complete: {:?} words", words.len());
 }
