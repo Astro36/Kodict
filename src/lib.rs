@@ -3,10 +3,11 @@ extern crate lazy_static;
 extern crate regex;
 extern crate reqwest;
 
-use std::collections::BTreeMap;
-
 pub mod crawler;
 pub mod fs;
+pub mod trie;
+
+use trie::TrieMap;
 
 #[derive(Debug)]
 pub struct Word {
@@ -17,33 +18,27 @@ pub struct Word {
 }
 
 pub struct Dictionary {
-    words: BTreeMap<String, Vec<Word>>,
+    words: trie::TrieMap<Word>,
 }
 
 impl Dictionary {
     pub fn new(words: Vec<Word>) -> Dictionary {
-        let mut map = BTreeMap::new();
+        let mut trie = TrieMap::new();
         for word in words {
-            let entry = word.entry.to_string();
-            if map.contains_key(&entry) {
-                let v: &mut Vec<Word> = map.get_mut(&entry).unwrap();
-                v.push(word);
-            } else {
-                map.insert(entry, vec![word]);
-            }
+            trie.insert(word.entry.to_string(), word);
         }
-        Dictionary { words: map }
+        Dictionary { words: trie }
     }
 
     pub fn find(&self, entry: &str) -> Option<&Vec<Word>> {
-        self.words.get(entry)
+        self.words.find(entry.to_string())
     }
 
     pub fn has(&self, entry: &str) -> bool {
-        self.words.contains_key(entry)
+        self.words.find(entry.to_string()).is_some()
     }
 
-    pub fn size(&self) -> usize {
-        self.words.len()
-    }
+    // pub fn size(&self) -> usize {
+    //     self.words.len()
+    // }
 }

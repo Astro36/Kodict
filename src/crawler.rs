@@ -3,7 +3,7 @@ use regex::Regex;
 use std::sync::mpsc::channel;
 use std::thread;
 
-pub fn get_standard_dictionary(thread_num: usize) -> Vec<Word> {
+pub fn get_standard_dictionary_words(thread_num: usize) -> Vec<Word> {
   let (sender, receiver) = channel();
   for i in 0..thread_num {
     lazy_static! {
