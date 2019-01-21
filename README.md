@@ -19,7 +19,22 @@ See [CHANGELOG](./CHANGELOG.md)
 - [Open Korean Dictionary(우리말샘)](https://opendict.korean.go.kr/main)
 - [Standard Korean Dictionary(국립국어원 표준국어대사전)](http://stdweb2.korean.go.kr/main.jsp)
 
-**Notice: Crawling Open Korean Dictionary spend too much time. You can download it [here](https://opendict.korean.go.kr/member/memberDownloadList).**
+Crawl [Standard Korean Dictionary](http://stdweb2.korean.go.kr/main.jsp) and save as [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) file:
+
+```rust
+extern crate kodict;
+
+use kodict::crawler;
+use kodict::fs;
+use std::path::Path;
+
+fn main() {
+    let words = crawler::get_standard_dictionary_words();
+    fs::write_as_tsv(Path::new("./dictionary.tsv"), &words);
+}
+```
+
+**Notice: Crawling [Open Korean Dictionary](https://opendict.korean.go.kr/main) spends too much time. You can download it [here](https://opendict.korean.go.kr/member/memberDownloadList).**
 
 ## Installation
 
