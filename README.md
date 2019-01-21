@@ -10,9 +10,16 @@ See [CHANGELOG](./CHANGELOG.md)
 
 ## Features
 
-- Crawl words from [Standard Korean Dictionary](http://stdweb2.korean.go.kr/main.jsp).
+- Crawl words from the online dictionary.
 - Find the given word from a dictionary.
 - Read and write a dictionary file.
+
+### Supported online dictionaries available crawling
+
+- [Open Korean Dictionary(우리말샘)](https://opendict.korean.go.kr/main)
+- [Standard Korean Dictionary(국립국어원 표준국어대사전)](http://stdweb2.korean.go.kr/main.jsp)
+
+**Notice: Crawling Open Korean Dictionary spend too much time. You can download it [here](https://opendict.korean.go.kr/member/memberDownloadList).**
 
 ## Installation
 
