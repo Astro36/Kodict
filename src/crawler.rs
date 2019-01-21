@@ -38,9 +38,11 @@ pub fn get_standard_dictionary_words() -> Vec<Word> {
   STANDARD_DIC_URLS
     .par_iter()
     .map(|url| {
-      dbg!(&url);
-      let html = reqwest::get(url).ok().unwrap().text().unwrap();
-      let elements: Vec<&str> = html
+      reqwest::get(url)
+        .ok()
+        .unwrap()
+        .text()
+        .unwrap()
         .split("<span id=\"print_area\">\n\t\t<p class=\"exp\">")
         .nth(1)
         .unwrap()
@@ -49,32 +51,31 @@ pub fn get_standard_dictionary_words() -> Vec<Word> {
         .unwrap()
         .trim()
         .split("</p>\n<p class=\"exp\">")
-        .collect();
-      let mut items = vec![];
-      for element in elements {
-        let word = HTML_REMOVER.replace_all(&element.split("</font></strong>").nth(0).unwrap(), "");
-        let desc = HTML_REMOVER.replace_all(
-          &element
-            .split("<img src=\'/image/0715_plus.gif\' /></a>&nbsp;")
-            .nth(1)
-            .unwrap(),
-          "",
-        );
-        let meaning = STANDARD_DIC_SIGN_REMOVER.replace_all(&desc, "");
-        items.push(Word {
-          entry: word.to_string(),
-          meaning: meaning.trim().replace("\n", " ").to_string(),
-          pos: STANDARD_DIC_POS_MATCHER
-            .captures_iter(&meaning)
-            .map(|c| c.get(1).unwrap().as_str().to_string())
-            .collect(),
-          category: STANDARD_DIC_CAT_MATCHER
-            .captures_iter(&meaning)
-            .map(|c| c.get(1).unwrap().as_str().to_string())
-            .collect(),
-        });
-      }
-      items
+        .map(|element| {
+          let word =
+            HTML_REMOVER.replace_all(&element.split("</font></strong>").nth(0).unwrap(), "");
+          let desc = HTML_REMOVER.replace_all(
+            &element
+              .split("<img src=\'/image/0715_plus.gif\' /></a>&nbsp;")
+              .nth(1)
+              .unwrap(),
+            "",
+          );
+          let meaning = STANDARD_DIC_SIGN_REMOVER.replace_all(&desc, "");
+          Word {
+            entry: word.to_string(),
+            meaning: meaning.trim().replace("\n", " ").to_string(),
+            pos: STANDARD_DIC_POS_MATCHER
+              .captures_iter(&meaning)
+              .map(|c| c.get(1).unwrap().as_str().to_string())
+              .collect(),
+            category: STANDARD_DIC_CAT_MATCHER
+              .captures_iter(&meaning)
+              .map(|c| c.get(1).unwrap().as_str().to_string())
+              .collect(),
+          }
+        })
+        .collect::<Vec<_>>()
     })
     .flatten()
     .collect()

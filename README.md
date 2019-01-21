@@ -1,12 +1,18 @@
 # Kodict
 
-> Provides Korean Dictionary Implements and Crawler for Rust
+> Korean Dictionary Manager for Rust
 
 [![Crates.io](https://img.shields.io/crates/v/kodict.svg?style=for-the-badge)](https://crates.io/crates/kodict) [![Crates.io](https://img.shields.io/crates/d/kodict.svg?style=for-the-badge)](https://crates.io/crates/kodict)
 
 ## Changelog
 
 See [CHANGELOG](./CHANGELOG.md)
+
+## Features
+
+- Crawl words from [Standard Korean Dictionary](http://stdweb2.korean.go.kr/main.jsp).
+- Find the given word from a dictionary.
+- Read and write a dictionary file.
 
 ## Installation
 
@@ -27,7 +33,7 @@ See [API](https://docs.rs/kodict)
 ## License
 
 ```text
-Copyright (c) 2018 Seungjae Park
+Copyright (c) 2019 Seungjae Park
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

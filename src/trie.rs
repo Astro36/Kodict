@@ -12,7 +12,11 @@ impl<T> TrieMap<T> {
     }
   }
 
-  pub fn find(&self, key: String) -> Option<&Vec<T>> {
+  pub fn contains_key(&self, key: String) -> bool {
+    self.get(key).is_some()
+  }
+
+  pub fn get(&self, key: String) -> Option<&Vec<T>> {
     match self.root.find_child(key.chars()) {
       Some(node) => Some(&node.values),
       None => None,
@@ -20,7 +24,7 @@ impl<T> TrieMap<T> {
   }
 
   pub fn insert(&mut self, key: String, value: T) {
-    self.root.append_child(key.chars().clone(), value);
+    self.root.append_child(key.chars(), value);
   }
 }
 
@@ -58,9 +62,7 @@ impl<T> TrieNode<T> {
   pub fn find_child(&self, mut key: Chars) -> Option<&TrieNode<T>> {
     match key.next() {
       Some(first_char) => match self.children.get(&first_char) {
-        Some(child) => {
-          child.find_child(key)
-        }
+        Some(child) => child.find_child(key),
         None => None,
       },
       None => Some(self),

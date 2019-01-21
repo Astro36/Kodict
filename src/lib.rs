@@ -1,5 +1,6 @@
 #[macro_use]
 extern crate lazy_static;
+extern crate rayon;
 extern crate regex;
 extern crate reqwest;
 
@@ -31,14 +32,10 @@ impl Dictionary {
     }
 
     pub fn find(&self, entry: &str) -> Option<&Vec<Word>> {
-        self.words.find(entry.to_string())
+        self.words.get(entry.to_string())
     }
 
     pub fn has(&self, entry: &str) -> bool {
-        self.words.find(entry.to_string()).is_some()
+        self.words.contains_key(entry.to_string())
     }
-
-    // pub fn size(&self) -> usize {
-    //     self.words.len()
-    // }
 }
