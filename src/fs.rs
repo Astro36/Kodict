@@ -1,8 +1,8 @@
-use super::Word;
+use super::{Word, Words};
 use std::fs;
 use std::path::Path;
 
-pub fn read_as_tsv(path: &Path) -> Vec<Word> {
+pub fn read_as_tsv<P: AsRef<Path>>(path: P) -> Words {
   fs::read_to_string(path)
     .expect("Unable to read file!")
     .split("\n")
@@ -18,9 +18,9 @@ pub fn read_as_tsv(path: &Path) -> Vec<Word> {
     .collect()
 }
 
-pub fn write_as_tsv(path: &Path, words: &Vec<Word>) {
+pub fn write_as_tsv<P: AsRef<Path>>(path: P, words: &Words) {
   fs::write(
-    &path,
+    path,
     words
       .into_iter()
       .map(|word| {

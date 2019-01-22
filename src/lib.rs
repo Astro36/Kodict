@@ -1,3 +1,4 @@
+extern crate calamine;
 #[macro_use]
 extern crate lazy_static;
 extern crate rayon;
@@ -6,6 +7,7 @@ extern crate reqwest;
 
 pub mod crawler;
 pub mod fs;
+pub mod parser;
 pub mod trie;
 
 use trie::TrieMap;
@@ -18,12 +20,14 @@ pub struct Word {
     pub category: Vec<String>,
 }
 
+pub type Words = Vec<Word>;
+
 pub struct Dictionary {
     words: trie::TrieMap<Word>,
 }
 
 impl Dictionary {
-    pub fn new(words: Vec<Word>) -> Dictionary {
+    pub fn new(words: Words) -> Dictionary {
         let mut trie = TrieMap::new();
         for word in words {
             trie.insert(word.entry.to_string(), word);
