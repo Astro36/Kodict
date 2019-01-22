@@ -35,7 +35,7 @@ fn main() {
 
 **Notice: Crawling [Open Korean Dictionary](https://opendict.korean.go.kr/main) spends too much time. You can download it [here](https://opendict.korean.go.kr/member/memberDownloadList).**
 
-Parse [Open Korean Dictionary](https://opendict.korean.go.kr/main) `words.xls`:
+Parse `dictionary.zip/words0.xls` downloaded from [Open Korean Dictionary](https://opendict.korean.go.kr/main):
 
 ```rust
 extern crate kodict;
@@ -44,7 +44,7 @@ use kodict::{Dictionary, parser};
 use std::path::Path;
 
 fn main() {
-    let words = parser::parse_open_dictionary_xls(Path::new("./words.xls"));
+    let words = parser::parse_open_dictionary_xls(Path::new("./words0.xls"));
     let dictionary = Dictionary::new(words);
 }
 ```
