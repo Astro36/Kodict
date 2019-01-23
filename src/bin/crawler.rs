@@ -1,7 +1,6 @@
 extern crate kodict;
 
-use kodict::crawler;
-use kodict::fs;
+use kodict::{crawler, fs};
 use std::path::Path;
 
 fn main() {

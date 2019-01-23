@@ -62,11 +62,10 @@ lazy_static! {
 }
 
 pub fn get_open_dictionary_words() -> Vec<Word> {
-  println!("note: Crawling Open Korean Dictionary spends too much time. You can download its website.");
+  println!("note: Crawling Open Korean Dictionary spends too much time. You can download the dictionary from its website.");
   OPEN_DIC_URLS
     .par_iter()
     .map(|url| {
-      dbg!(&url);
       reqwest::get(url)
         .ok()
         .unwrap()
