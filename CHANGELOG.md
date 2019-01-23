@@ -1,5 +1,33 @@
 # Changelog
 
+## v0.2.0
+
+Released Jan 23, 2019
+
+### Added
+
+- Add `Words` type.
+- Add `crawler` module.
+  - [Open Korean Dictionary](https://opendict.korean.go.kr/main) crawler (not recommended)
+  - [Standard Korean Dictionary](http://stdweb2.korean.go.kr/main.jsp) crawler
+- Add `fs` module.
+  - [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) reader / writer
+- Add `parser` module.
+  - [Open Korean Dictionary](https://opendict.korean.go.kr/main) [XLS](https://en.wikipedia.org/wiki/Microsoft_Excel_file_format) parser
+- Add `trie` module.
+
+### Changed
+
+- Change `DictionaryItem` struct name to `Word`.
+  - Change `word` field name to `entry`.
+- Now `dictionary.find` returns `Option<&Words>`.
+
+### Removed
+
+- Remove `dictionary.create_from_web` method.
+- Remove `dictionary.create_from_file` and `dictionary.save_as_tsv` method.
+- Remove `dictionary.find_all` method.
+
 ## v0.1.3
 
 Released Nov 29, 2018

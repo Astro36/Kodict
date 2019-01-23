@@ -35,11 +35,11 @@ impl Dictionary {
         Dictionary { words: map }
     }
 
-    pub fn find(&self, entry: &str) -> Option<&Vec<Word>> {
+    pub fn find(&self, entry: &str) -> Option<&Words> {
         self.words.get(entry.to_string())
     }
 
-    pub fn find_mut(&mut self, entry: &str) -> Option<&mut Vec<Word>> {
+    pub fn find_mut(&mut self, entry: &str) -> Option<&mut Words> {
         self.words.get_mut(entry.to_string())
     }
 
