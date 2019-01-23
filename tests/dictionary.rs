@@ -11,4 +11,6 @@ fn main() {
     dbg!(dictionary.find("사과").unwrap());
     assert_eq!(dictionary.has("사과"), true);
     assert_eq!(dictionary.has("배추"), false);
+    assert_eq!(dictionary.get_all().len(), 10);
+    assert_eq!(dictionary.size(), 10);
 }

@@ -23,23 +23,35 @@ pub struct Word {
 pub type Words = Vec<Word>;
 
 pub struct Dictionary {
-    words: trie::TrieMap<Word>,
+    pub words: trie::TrieMap<Word>,
 }
 
 impl Dictionary {
     pub fn new(words: Words) -> Dictionary {
-        let mut trie = TrieMap::new();
+        let mut map = TrieMap::new();
         for word in words {
-            trie.insert(word.entry.to_string(), word);
+            map.insert(word.entry.to_string(), word);
         }
-        Dictionary { words: trie }
+        Dictionary { words: map }
     }
 
     pub fn find(&self, entry: &str) -> Option<&Vec<Word>> {
         self.words.get(entry.to_string())
     }
 
+    pub fn find_mut(&mut self, entry: &str) -> Option<&mut Vec<Word>> {
+        self.words.get_mut(entry.to_string())
+    }
+
+    pub fn get_all(&self) -> Vec<&Word> {
+        self.words.values()
+    }
+
     pub fn has(&self, entry: &str) -> bool {
         self.words.contains_key(entry.to_string())
+    }
+
+    pub fn size(&self) -> usize {
+        self.words.len()
     }
 }
