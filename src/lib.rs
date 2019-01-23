@@ -10,7 +10,7 @@ pub mod fs;
 pub mod parser;
 pub mod trie;
 
-use trie::TrieMap;
+use trie::Map;
 
 #[derive(Debug)]
 pub struct Word {
@@ -23,12 +23,12 @@ pub struct Word {
 pub type Words = Vec<Word>;
 
 pub struct Dictionary {
-    pub words: trie::TrieMap<Word>,
+    pub words: Map<Word>,
 }
 
 impl Dictionary {
     pub fn new(words: Words) -> Dictionary {
-        let mut map = TrieMap::new();
+        let mut map = Map::new();
         for word in words {
             map.insert(word.entry.to_string(), word);
         }

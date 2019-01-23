@@ -1,21 +1,21 @@
 use std::collections::HashMap;
 use std::str::Chars;
 
-pub struct TrieMap<T> {
-  root: TrieNode<T>,
+pub struct Map<T> {
+  root: Node<T>,
   length: usize,
 }
 
-impl<T> TrieMap<T> {
-  pub fn new() -> TrieMap<T> {
-    TrieMap {
-      root: TrieNode::new(),
+impl<T> Map<T> {
+  pub fn new() -> Map<T> {
+    Map {
+      root: Node::new(),
       length: 0,
     }
   }
 
   pub fn clear(&mut self) {
-    self.root = TrieNode::new();
+    self.root = Node::new();
     self.length = 0;
   }
 
@@ -60,14 +60,14 @@ impl<T> TrieMap<T> {
   }
 }
 
-pub struct TrieNode<T> {
-  children: HashMap<char, TrieNode<T>>,
+pub struct Node<T> {
+  children: HashMap<char, Node<T>>,
   pub values: Vec<T>,
 }
 
-impl<T> TrieNode<T> {
-  pub fn new() -> TrieNode<T> {
-    TrieNode {
+impl<T> Node<T> {
+  pub fn new() -> Node<T> {
+    Node {
       children: HashMap::new(),
       values: vec![],
     }
@@ -80,7 +80,7 @@ impl<T> TrieNode<T> {
           child.append_child(key, value);
         }
         None => {
-          let mut child = TrieNode::new();
+          let mut child = Node::new();
           child.append_child(key, value);
           self.children.insert(first_char, child);
         }
@@ -91,7 +91,7 @@ impl<T> TrieNode<T> {
     }
   }
 
-  pub fn find_child(&self, mut key: Chars) -> Option<&TrieNode<T>> {
+  pub fn find_child(&self, mut key: Chars) -> Option<&Node<T>> {
     match key.next() {
       Some(first_char) => match self.children.get(&first_char) {
         Some(child) => child.find_child(key),
@@ -101,7 +101,7 @@ impl<T> TrieNode<T> {
     }
   }
 
-  pub fn find_child_mut(&mut self, mut key: Chars) -> Option<&mut TrieNode<T>> {
+  pub fn find_child_mut(&mut self, mut key: Chars) -> Option<&mut Node<T>> {
     match key.next() {
       Some(first_char) => match self.children.get_mut(&first_char) {
         Some(child) => child.find_child_mut(key),
@@ -111,8 +111,8 @@ impl<T> TrieNode<T> {
     }
   }
 
-  pub fn traverse(&self) -> Vec<&TrieNode<T>> {
-    let mut children: Vec<&TrieNode<T>> = self
+  pub fn traverse(&self) -> Vec<&Node<T>> {
+    let mut children: Vec<&Node<T>> = self
       .children
       .iter()
       .flat_map(|(_, node)| node.traverse())
