@@ -1,7 +1,6 @@
 extern crate kodict;
 
-use kodict::fs;
-use kodict::Dictionary;
+use kodict::{fs, Dictionary};
 use std::path::Path;
 
 #[test]

@@ -5,7 +5,7 @@ use std::path::Path;
 pub fn read_as_tsv<P: AsRef<Path>>(path: P) -> Words {
     fs::read_to_string(path)
         .expect("Unable to read file!")
-        .split("\n")
+        .lines()
         .map(|element| {
             let props = element.split("\t").collect::<Vec<&str>>();
             Word {

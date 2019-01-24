@@ -12,7 +12,11 @@ pub fn parse_open_dictionary_xls<P: AsRef<Path>>(path: P) -> Words {
             .skip(1)
             .map(|data| Word {
                 entry: data[0].get_string().unwrap().to_string(),
-                meaning: data[13].get_string().unwrap().to_string(),
+                meaning: data[13]
+                    .get_string()
+                    .unwrap()
+                    .replace("\n", " ")
+                    .to_string(),
                 pos: vec![data[11].get_string().unwrap().to_string()],
                 category: vec![data[18]
                     .get_string()
