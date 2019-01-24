@@ -9,6 +9,7 @@ pub fn parse_open_dictionary_xls<P: AsRef<Path>>(path: P) -> Words {
     {
         Some(Ok(range)) => range
             .rows()
+            .skip(1)
             .map(|data| Word {
                 entry: data[0].get_string().unwrap().to_string(),
                 meaning: data[13].get_string().unwrap().to_string(),
