@@ -49,6 +49,20 @@ fn main() {
 }
 ```
 
+If you want to convert [Open Korean Dictionary](https://opendict.korean.go.kr/main)’s [XLS](https://en.wikipedia.org/wiki/Microsoft_Excel_file_format) to [TSV](https://en.wikipedia.org/wiki/Tab-separated_values), use `xls2tsv` executable.
+
+Convert a dictionary directory to [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) file:
+
+```bash
+xls2tsv input_dir/ output.tsv
+```
+
+Convert a dictionary file to [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) file:
+
+```bash
+xls2tsv input.xls output.tsv
+```
+
 ## Installation
 
 - Install with [cargo](https://crates.io/crates/kodict).
