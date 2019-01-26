@@ -1,9 +1,5 @@
-extern crate calamine;
 #[macro_use]
 extern crate lazy_static;
-extern crate rayon;
-extern crate regex;
-extern crate reqwest;
 
 pub mod crawler;
 pub mod fs;
