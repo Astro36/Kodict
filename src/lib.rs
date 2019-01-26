@@ -54,4 +54,8 @@ impl Dictionary {
     pub fn size(&self) -> usize {
         self.words.len()
     }
+
+    pub fn starts_with(&self, start: &str) -> Option<Vec<&Word>> {
+        self.words.range(start.to_string())
+    }
 }

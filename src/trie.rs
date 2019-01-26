@@ -50,9 +50,18 @@ impl<T> Map<T> {
         self.length
     }
 
+    pub fn range(&self, key: String) -> Option<Vec<&T>> {
+        match self.root.find_child(key.chars()) {
+            Some(node) => Some(node.traverse()
+                .into_iter()
+                .flat_map(|node| &node.values)
+                .collect()),
+            None => None,
+        }
+    }
+
     pub fn values(&self) -> Vec<&T> {
-        self
-            .root
+        self.root
             .traverse()
             .into_iter()
             .flat_map(|node| &node.values)
