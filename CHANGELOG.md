@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.2.1
+
+Released Jan 26, 2019
+
+### Added
+
+- Add [XLS](https://en.wikipedia.org/wiki/Microsoft_Excel_file_format) to [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) converter: `xls2tsv`
+- Add `dictionary.starts_with` and `map.range` methods.
+
+### Fixed
+
+- Fix an error included column names in the words.
+- Fix [Open Korean Dictionary](https://opendict.korean.go.kr/main) crawler’s [escape sequence](https://en.wikipedia.org/wiki/Escape_sequence) bug.
+- Remove `extern crate`; it is going away in the 2018 edition.
+
 ## v0.2.0
 
 Released Jan 23, 2019
