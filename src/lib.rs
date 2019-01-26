@@ -6,7 +6,7 @@ pub mod fs;
 pub mod parser;
 pub mod trie;
 
-use trie::Map;
+use crate::trie::Map;
 
 #[derive(Debug)]
 pub struct Word {

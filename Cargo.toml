@@ -1,6 +1,6 @@
 [package]
 name = "kodict"
-description = "Provides Korean Dictionary Implements and Crawler for Rust"
+description = "Korean Dictionary Manager for Rust"
 version = "0.2.1"
 authors = ["Seungjae Park <astr36@naver.com>"]
 edition = "2018"
