@@ -1,5 +1,3 @@
-extern crate kodict;
-
 use kodict::{fs, parser};
 use std::env;
 use std::ffi::OsStr;

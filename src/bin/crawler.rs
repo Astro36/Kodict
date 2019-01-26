@@ -1,5 +1,3 @@
-extern crate kodict;
-
 use kodict::{crawler, fs};
 use std::path::Path;
 
