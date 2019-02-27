@@ -2,7 +2,7 @@
 name = "kodict"
 description = "Korean Dictionary Manager for Rust"
 version = "0.2.1"
-authors = ["Seungjae Park <astr36@naver.com>"]
+authors = ["Seungjae Park <astro.psj@gmail.com>"]
 edition = "2018"
 documentation = "https://docs.rs/kodict"
 repository = "https://github.com/Astro36/kodict"
